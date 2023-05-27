@@ -5,73 +5,72 @@
  * never differ by more than 1.
  */
 
-#include <iostream>
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
 /*
-* Definition for binary tree
-*/
+ * Definition for binary tree
+ */
 struct TreeNode {
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
 class Solution {
-public:
-	bool isBalanced(TreeNode *root) {
-		if (!root || (!root->left && !root->right)) {
-			return true;
-		}
-		if (abs(depth(root->left) - depth(root->right)) > 1) {
-			return false;
-		}
+  public:
+    bool isBalanced(TreeNode *root) {
+        if (!root || (!root->left && !root->right)) {
+            return true;
+        }
+        if (abs(depth(root->left) - depth(root->right)) > 1) {
+            return false;
+        }
 
-		return isBalanced(root->left) && isBalanced(root->right);
-	}
+        return isBalanced(root->left) && isBalanced(root->right);
+    }
 
-private:
-	int depth(TreeNode *root){
-		if (!root) {
-			return 0;
-		}
+  private:
+    int depth(TreeNode *root) {
+        if (!root) {
+            return 0;
+        }
 
-		return max(depth(root->left), depth(root->right)) + 1;
-	}
+        return max(depth(root->left), depth(root->right)) + 1;
+    }
 };
 
-int main()
-{
-	/*
-	*                5
-	*             /    \
-	*            4      8
-	*           / \    / \
-	*          11  5  13  4
-	*         /  \      
-	*        7    2
-	*/
-	TreeNode *root = new TreeNode(5);
+int main() {
+    /*
+     *                5
+     *             /    \
+     *            4      8
+     *           / \    / \
+     *          11  5  13  4
+     *         /  \
+     *        7    2
+     */
+    TreeNode *root = new TreeNode(5);
 
-	root->left = new TreeNode(4);
-	root->right = new TreeNode(8);
+    root->left = new TreeNode(4);
+    root->right = new TreeNode(8);
 
-	root->left->left = new TreeNode(11);
-	root->left->left->left = new TreeNode(7);
-	root->left->left->right = new TreeNode(2);
+    root->left->left = new TreeNode(11);
+    root->left->left->left = new TreeNode(7);
+    root->left->left->right = new TreeNode(2);
 
-	root->left->right = new TreeNode(5);
+    root->left->right = new TreeNode(5);
 
-	root->right->left = new TreeNode(13);
-	root->right->right = new TreeNode(4);
+    root->right->left = new TreeNode(13);
+    root->right->right = new TreeNode(4);
 
-	Solution solution;
+    Solution solution;
 
-	cout << solution.isBalanced(root) << endl;
+    cout << solution.isBalanced(root) << endl;
 
-	return 0;
+    return 0;
 }
